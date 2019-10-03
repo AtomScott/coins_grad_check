@@ -43,7 +43,7 @@ def g(df):
     for i, row in kamoku.iterrows():
         print((row["科目番号"],row["単位"],row["科目名"]))
 
-    if tannisu > 5.5:
+    if tannisu >= 5.5:
         print("\tクリア", end=': ')
     else:
         print("\t卒業できません", end=': ')
