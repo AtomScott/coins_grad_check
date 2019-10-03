@@ -80,8 +80,13 @@ def spots1(df):
 
 
 
+	print("専門基礎科目 選択科目")
 	check(bag1, thr1)
+
+
 	check(bag2, thr2)
+
+	print("専門科目 自由科目")
 	check(bag3, thr3)
 
 
