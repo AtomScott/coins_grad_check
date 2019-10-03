@@ -13,5 +13,5 @@ print("専攻 : "+senko+" GB"+str(major))
 df = pd.read_csv('./data.csv')
 df = check.f(df, senko=senko)
 
-df = check2.spots1(df)
 df = check2.spots2(df, major=major)
+df = check2.spots1(df)

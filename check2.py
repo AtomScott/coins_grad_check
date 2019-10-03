@@ -12,6 +12,7 @@ import re
 def check(bag, thr):
 	total = 0
 	for kamoku in bag:
+		print(kamoku)
 		total += kamoku[1]
 
 	if total >= thr:
@@ -19,6 +20,8 @@ def check(bag, thr):
 	else:
 		print("\t卒業できません" + str(total)+"/"+str(thr))
 
+
+	print("===================")
 
 
 def spots1(df):
@@ -33,12 +36,15 @@ def spots1(df):
 
 	bag1 = []
 	bag2 = []
+	bag3 = []
 
 	thr1 = 8
 	thr2 = 12
+	thr3 = 4
 
 	total1 = 0
 	total2 = 0
+	total3 = 0
 
 	for i,row in df.iterrows():
 		if str(row["科目名"]) in spot1:
@@ -56,8 +62,19 @@ def spots1(df):
 
 	for i,row in df.iterrows():
 		if str(row["科目番号"])[:3] == "GB1" or str(row["科目番号"])[:3] == "GA1":
-			total2 += row["単位"]
-			bag2.append((row["科目番号"],row["単位"],row["科目名"]))
+			if total2 < thr2:
+				total2 += row["単位"]
+				bag2.append((row["科目番号"],row["単位"],row["科目名"]))
+				df = df[df['科目番号'] != row["科目番号"]]
+
+
+	# spot2終了
+
+
+	for i,row in df.iterrows():
+		if (str(row["科目番号"])[:2] == "GB" and str(row["科目番号"])[:3] != "GB0") or str(row["科目番号"])[:3] == "GA1":
+			total3 += row["単位"]
+			bag3.append((row["科目番号"],row["単位"],row["科目名"]))
 			df = df[df['科目番号'] != row["科目番号"]]
 
 
@@ -65,6 +82,7 @@ def spots1(df):
 
 	check(bag1, thr1)
 	check(bag2, thr2)
+	check(bag3, thr3)
 
 
 	return df
@@ -136,23 +154,24 @@ def spots2(df, major):
 
 	for i,row in df.iterrows():
 		if str(row["科目番号"])[:3] == "GB2" or str(row["科目番号"])[:3] == "GB3" or str(row["科目番号"])[:3] == "GB4":
-			total3 += row["単位"]
-			bag3.append((row["科目番号"],row["単位"],row["科目名"]))
+			if total3 < thr3:
+				total3 += row["単位"]
+				bag3.append((row["科目番号"],row["単位"],row["科目名"]))
 
-			df = df[df['科目番号'] != row["科目番号"]]
+				df = df[df['科目番号'] != row["科目番号"]]
 
 
 
 
 	print("GB"+str(major))
 	check(bag1, thr1)
+
+
 	print("GB20, GB30, GB40, 情報セキュリティ")
 	check(bag2, thr2)
 	print("GB2, GB3, GB4")
 	check(bag3, thr3)
 
-	print(bag2)
-	print(bag3)
 
 
 	return df
