@@ -2,8 +2,7 @@ import pandas as pd
 
 senko = 'ソフトウェアサイエンス'
 
-def f(df, senko):
-    df0 = pd.read_csv('./data.csv')
+def f(df0, senko):
     df0.columns = df0.columns.str.strip()
 
     # 不合格単位を落とす
@@ -22,8 +21,13 @@ def f(df, senko):
     # 専門基礎科目選択科目 （残す）
     senmonkiso_sentaku = ['解析学Ⅲ', '複素環数論', 'コンピュータ数学', '確率論', '力学', '技術英語', '情報特別演習Ⅰ', '情報特別演習Ⅱ', 'Mathematics for Computer Science']
 
-    print('正しくできていたらTrue: ', len(df3)==len(df1) - len(senmon_hisshu) -len(senmonkiso_hisshu))
+    print("必修")
+    if len(df3)==len(df1) - len(senmon_hisshu) -len(senmonkiso_hisshu):
+        print("\tクリア")
+    else:
+        print("\t卒業できません")
+    #print('正しくできていたらTrue: ', len(df3)==len(df1) - len(senmon_hisshu) -len(senmonkiso_hisshu))
 
-    print(df3['科目名'])
+    #print(df3['科目名'])
 
-    return df
+    return df3
